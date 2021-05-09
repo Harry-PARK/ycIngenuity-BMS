@@ -1,0 +1,2 @@
+device_id,connection_string,light,online,last_updated,installed_date,building,floor,room_name,room_code
+b,b,false,false,1620526935362,1620526935362,ind,1,lab2,i102
