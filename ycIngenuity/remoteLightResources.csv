@@ -1,2 +1,2 @@
 device_id,connection_string,light,online,last_updated,installed_date,building,floor,room_name,room_code
-b,b,false,false,1620526935362,1620526935362,ind,1,lab2,i102
+azuretest,HostName=ycbms.azure-devices.net;DeviceId=azuretest;SharedAccessKey=pRpQ9B0tHDhxLIf5WJdOyQU9R1UBPosyqeCv13fict0=,false,false,1620565289191,1620565289191,ind,1,lab2,i102

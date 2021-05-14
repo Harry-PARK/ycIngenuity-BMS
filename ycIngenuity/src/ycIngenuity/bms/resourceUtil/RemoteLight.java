@@ -11,7 +11,7 @@ public class RemoteLight {
 	private String connection_string;
 	
 	//control info
-	private Boolean light; //on off
+	private Boolean powerOn; //on off
 	private Boolean online; // connected
 	private Date last_updated;
 	
@@ -28,7 +28,7 @@ public class RemoteLight {
 		if(data.length == fieldNum) {
 			setDevice_id(data[0]);
 			setConnection_string(data[1]);
-			setLightByString(data[2]);
+			setPowerOnByString(data[2]);
 			setOnlineByString(data[3]);
 			if(data[4].equals("0")) {
 				//0 for new device registry
@@ -42,7 +42,7 @@ public class RemoteLight {
 				installed_date = new Date();
 			}
 			else {
-				setLast_updatedByString(data[5]);
+				setInstalled_dateByString(data[5]);
 			}
 			setBuilding(data[6]);
 			setFloor(data[7]);
@@ -63,15 +63,15 @@ public class RemoteLight {
 	private void setConnection_string(String connection_string) {
 		this.connection_string = connection_string;
 	}
-	public Boolean getLight() {
-		return light;
+	public Boolean getPowerOn() {
+		return powerOn;
 	}
-	public void setLightByString(String light) {
-		if (light.equals("true")) {
-			this.light = true;
+	public void setPowerOnByString(String powerOn) {
+		if (powerOn.equals("true")) {
+			this.powerOn = true;
 		}
 		else {
-			this.light = false;
+			this.powerOn = false;
 		}
 	}
 	public Boolean getOnline() {
@@ -127,16 +127,16 @@ public class RemoteLight {
 	public String toJSON(){
 		StringBuilder info = new StringBuilder();
 		info.append("{");
-		info.append(" Device_id:" + this.device_id + ",");
-		info.append(" Connection_String:" + this.connection_string + ",");
-		info.append(" Light:"+this.light + ",");
-		info.append(" Online:" + this.online + ",");
-		info.append(" Last_Updated:" + this.last_updated.getTime() + ",");
-		info.append(" Installed_Date:" + this.installed_date.getTime() + ",");
-		info.append(" Building:" + this.building + ",");
-		info.append(" Floor:" + this.floor + ",");
-		info.append(" Room_Name:" + this.room_name + ",");
-		info.append(" Room_Code:" + this.room_code);
+		info.append(" device_id:" + this.device_id + ",");
+		info.append(" connection_string:" + this.connection_string + ",");
+		info.append(" power_on:"+this.powerOn + ",");
+		info.append(" online:" + this.online + ",");
+		info.append(" last_updated:" + this.last_updated.getTime() + ",");
+		info.append(" installed_date:" + this.installed_date.getTime() + ",");
+		info.append(" building:" + this.building + ",");
+		info.append(" floor:" + this.floor + ",");
+		info.append(" room_name:" + this.room_name + ",");
+		info.append(" room_code:" + this.room_code);
 		info.append("}");
 		return info.toString();
 	}
@@ -151,7 +151,7 @@ public class RemoteLight {
 		StringBuilder csv = new StringBuilder();
 		csv.append(this.device_id +",");
 		csv.append(this.connection_string +",");
-		csv.append(this.light +",");
+		csv.append(this.powerOn +",");
 		csv.append(this.online +",");
 		csv.append(this.last_updated.getTime() +",");
 		csv.append(this.installed_date.getTime() +",");

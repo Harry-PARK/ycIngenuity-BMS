@@ -14,7 +14,7 @@ public class TextRemoteLightFileSystem implements ResourceSLU<RemoteLight>{
 	private Charset charset = StandardCharsets.UTF_8;
 	private String column = "device_id,"
 			+ "connection_string,"
-			+ "light,"
+			+ "powerOn,"
 			+ "online,"
 			+ "last_updated,"
 			+ "installed_date,"
@@ -53,6 +53,7 @@ public class TextRemoteLightFileSystem implements ResourceSLU<RemoteLight>{
 		csvStr.append(this.column + newLine);
 		for(RemoteLight item : resources) {
 			csvStr.append(item.toCSV() + newLine);
+			System.out.println(item.toCSV());
 		}
 		Boolean success = writeFile(csvStr.toString());
 		return success;

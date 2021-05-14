@@ -15,9 +15,12 @@ public class RemoteLightResourceManager extends ResourceManager<RemoteLight>{
 	public final String lightOn = "lightOn";
 	public final String lightOff = "lightOff";
 
-	public RemoteLightResourceManager(ResourceSLU<RemoteLight> rslu){
+	private String shareAccessKeyToAzure = null;
+	
+	public RemoteLightResourceManager(ResourceSLU<RemoteLight> rslu, String saka){
 		//super(rslu) initiate ResourseFileSystem and load resource
 		super(rslu);
+		shareAccessKeyToAzure = saka;
 	}
 	
 	public RemoteLight findByDeviceID(String device_id) {
@@ -37,13 +40,6 @@ public class RemoteLightResourceManager extends ResourceManager<RemoteLight>{
 		RemoteLight light = findByDeviceID(device_id);
 		return lightOnMethod(light);
 	}
-	private MethodResult lightOnMethod(RemoteLight light) {
-		MethodResult result = sendDirectMethod(light, lightOn, null);
-		if(result.getStatus() == 200) {
-			light.setLightByString("true");
-		}
-		return result;
-	}
 	
 	public MethodResult lightOff(RemoteLight light) {
 		return lightOffMethod(light);
@@ -52,10 +48,20 @@ public class RemoteLightResourceManager extends ResourceManager<RemoteLight>{
 		RemoteLight light = findByDeviceID(device_id);
 		return lightOffMethod(light);
 	}
+	
+	
+	private MethodResult lightOnMethod(RemoteLight light) {
+		MethodResult result = sendDirectMethod(light, lightOn, null);
+		if(result != null && result.getStatus() == 200) {
+			light.setPowerOnByString("true");
+		}
+		return result;
+	}
+	
 	private MethodResult lightOffMethod(RemoteLight light) {
 		MethodResult result = sendDirectMethod(light, lightOff, null);
-		if(result.getStatus() == 200) {
-			light.setLightByString("false");
+		if(result != null && result.getStatus() == 200) {
+			light.setPowerOnByString("false");
 		}
 		return result;
 	}
@@ -73,7 +79,7 @@ public class RemoteLightResourceManager extends ResourceManager<RemoteLight>{
 		//TODO rebuild print log
 		try {
 			// Create a DeviceMethod instance to call a direct method.
-			DeviceMethod methodClient = DeviceMethod.createFromConnectionString(light.getConnection_string());
+			DeviceMethod methodClient = DeviceMethod.createFromConnectionString(shareAccessKeyToAzure);
 			// Call the direct method.
 			result = methodClient.invoke
 				(light.getDevice_id(), 

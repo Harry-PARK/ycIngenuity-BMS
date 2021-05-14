@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = 
-	ycIngenuity.bms.resourceUtil.*
+	"ycIngenuity.bms.resourceUtil.*"
  %>
 <!DOCTYPE html>
 <html>
@@ -11,7 +11,11 @@
 </head>
 <body>
 
-
+<%
+AccountResourceManager tempA = BMS_Container.getAccountRsourceManager();
+//String a = tempA.getResource().get(0).getEmail(); 
+%>
+<%tempA.save_resource(); %>
 
 </body>
 </html>
