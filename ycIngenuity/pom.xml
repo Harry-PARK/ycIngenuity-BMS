@@ -30,5 +30,19 @@
   		<artifactId>iot-service-client</artifactId>
   		<version>1.13.0</version>
   	</dependency>
+  	
+  	<dependency>
+  <groupId>org.apache.maven.resolver</groupId>
+  <artifactId>maven-resolver-transport-file</artifactId>
+  <version>1.4.1</version>
+  <scope>test</scope>
+</dependency>
+<dependency>
+  <groupId>org.apache.maven.resolver</groupId>
+  <artifactId>maven-resolver-transport-wagon</artifactId>
+  <version>1.4.1</version>
+  <scope>test</scope>
+    </dependency>
+    
   </dependencies>
 </project>
