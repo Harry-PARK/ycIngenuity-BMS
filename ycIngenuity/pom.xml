@@ -4,7 +4,7 @@
   <artifactId>ycIngenuity</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <!-- 
+
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
@@ -22,20 +22,17 @@
           <warSourceDirectory>WebContent</warSourceDirectory>
         </configuration>
       </plugin>
-    </plugins>
-  </build>
-  
-  -->
-  <build>
-  <finalName>helidon-hello-azure</finalName>
-  <plugins>
-    <plugin>
+      
+       <plugin>
       <groupId>com.microsoft.azure</groupId>
       <artifactId>azure-webapp-maven-plugin</artifactId>
       <version>1.10.0</version>
     </plugin>
-  </plugins>
-</build>
+      
+    </plugins>
+  </build>
+  
+
 
   <dependencies>
   	<dependency>

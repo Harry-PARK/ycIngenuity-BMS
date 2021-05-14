@@ -8,9 +8,7 @@ public class Testbed {
 		//AccountResourceManager tempA = BMS_Container.getAccountRsourceManager();
 		/*
 		RemoteLight a = temp.getResource().get(0);
-		temp.lightOn(a);
-		Thread.sleep(5000);
-		temp.lightOff(a);
+		System.out.println(a.getDevice_id());
 		*/
 		
 	
