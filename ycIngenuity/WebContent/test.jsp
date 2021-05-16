@@ -11,11 +11,22 @@
 </head>
 <body>
 
-<%
-AccountResourceManager tempA = BMS_Container.getAccountRsourceManager();
-//String a = tempA.getResource().get(0).getEmail(); 
-%>
-<%tempA.save_resource(); %>
+<p>test jsp</p>
 
+<%= BMS_Container.getRemoteLightManager().getResource().get(0).getDevice_id() %>
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	$.ajax({
+		type: 'PUT',
+		url:"/ycIngenuity/restful/remotelight/lighton",
+        data : {
+        	email:"airroket@naver.com",
+        	pw:"asdf",
+        	device_id : "azuretest"
+        },
+	}).done(function(data) {
+	    alert(data);
+	  });
+</script>
 </html>
