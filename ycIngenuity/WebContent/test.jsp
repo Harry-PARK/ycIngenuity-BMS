@@ -19,11 +19,11 @@
 <script type="text/javascript">
 	$.ajax({
 		type: 'PUT',
-		url:"/ycIngenuity/restful/remotelight/lighton",
+		url:"/ycIngenuityBMS/restful/remotelight/azuretest",
         data : {
         	email:"airroket@naver.com",
         	pw:"asdf",
-        	device_id : "azuretest"
+        	command : "lighton"
         },
 	}).done(function(data) {
 	    alert(data);

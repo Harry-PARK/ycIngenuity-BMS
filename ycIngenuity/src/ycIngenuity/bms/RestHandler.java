@@ -81,17 +81,13 @@ public class RestHandler extends HttpServlet{
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		/*
-		 * [2]unit 		: remotelight
-		 * [3]command 	: lighton
+		 * [2]unit 		: ex) remotelight
+		 * [3]id 		: id
 		 */
 		response.setContentType("text/html; charset=utf-8");
 
 		HashMap<String, String> param = getPutParameter(request.getInputStream());
 		String[] command = request.getRequestURI().substring(1).split("/"); //remove empty command
-		for (String c : command) {
-			System.out.println("="+c);
-		}
-		
 		
 		switch(command[2]) {
 		case "remotelight":

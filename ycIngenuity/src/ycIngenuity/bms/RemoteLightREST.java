@@ -31,12 +31,11 @@ public class RemoteLightREST {
 			return;
 		}
 		
-		
-		
+		String device_id = command[3];
 		MethodResult mr;
-		switch(command[3]) {
+		switch(param.get("command")) {
 		case "lighton":
-			mr = BMS_Container.getRemoteLightManager().lightOn(param.get("device_id"));
+			mr = BMS_Container.getRemoteLightManager().lightOn(device_id);
 			if(mr == null) {
 				CommonREST.initResultMap(resultMap, "false", null, null);
 			}
@@ -49,7 +48,7 @@ public class RemoteLightREST {
 			}
 			break;
 		case "lightoff":
-			mr = BMS_Container.getRemoteLightManager().lightOff(param.get("device_id"));
+			mr = BMS_Container.getRemoteLightManager().lightOff(device_id);
 			if(mr == null) {
 				CommonREST.initResultMap(resultMap, "false", null, null);
 			}
