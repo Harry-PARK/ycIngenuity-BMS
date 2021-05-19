@@ -11,8 +11,6 @@ public class Testbed {
 		System.out.println(a.getDevice_id());
 		*/
 		
-				
-		
 		
 	}
 }

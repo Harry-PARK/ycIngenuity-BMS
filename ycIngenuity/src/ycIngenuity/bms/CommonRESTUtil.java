@@ -5,7 +5,7 @@ import java.util.Map;
 
 import ycIngenuity.bms.resourceUtil.BMS_Container;
 
-public class CommonREST {
+public class CommonRESTUtil {
 	
 	static Boolean checkValidAccount(String email, String pw) {
 		return BMS_Container.getAccountRsourceManager().checkIDPW(email, pw);
@@ -31,4 +31,9 @@ public class CommonREST {
 		json.append("}");
 		return json.toString();
 	}
+	
+	static String expect(String[] command, int index) {
+		return command.length>index?command[index]:null;
+	}
+
 }

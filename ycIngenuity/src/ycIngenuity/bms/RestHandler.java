@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.util.HashMap;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -59,45 +60,59 @@ public class RestHandler extends HttpServlet{
 
 	
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.println("<p>test success</p>");
-		out.println("<p>"+request.getRequestURL()+"</p>");
-		out.println("<p>"+request.getParameter("id")+"+</p>");
-		
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.println("<p>test post success</p>");
-		out.println("<p>"+request.getRequestURL()+"</p>");
-		out.println("<p>"+request.getParameter("id")+"+</p>");
-	}
-	
-	
-	@Override
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException{
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		super.doGet(req, resp);
+		resp.setContentType("text/html; charset=utf-8");
 		/*
 		 * [2]unit 		: ex) remotelight
 		 * [3]id 		: id
 		 */
-		response.setContentType("text/html; charset=utf-8");
-
-		HashMap<String, String> param = getPutParameter(request.getInputStream());
-		String[] command = request.getRequestURI().substring(1).split("/"); //remove empty command
-		
-		switch(command[2]) {
+		String[] command = req.getRequestURI().substring(1).split("/");
+		switch(CommonRESTUtil.expect(command, 2)) {
 		case "remotelight":
-			RemoteLightREST.putMain(request, response, command, param);
+			RemoteLightREST.getMain(req, resp, command);
 			break;
 		default :
-			PrintWriter out = response.getWriter();
+			PrintWriter out = resp.getWriter();
 			HashMap<String, String> resultMap = new HashMap<>();
-			CommonREST.initResultMap(resultMap, "false", null, invalidCommand);
-			out.println(CommonREST.mapJSON(resultMap));
+			CommonRESTUtil.initResultMap(resultMap, "false", null, invalidCommand);
+			out.println(CommonRESTUtil.mapJSON(resultMap));
+			break;
+		
+		}
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		super.doPost(req, resp);
+		resp.setContentType("text/html; charset=utf-8");
+		PrintWriter out = resp.getWriter();
+		out.println("<p>test post success</p>");
+		out.println("<p>"+req.getRequestURL()+"</p>");
+		out.println("<p>"+req.getParameter("id")+"+</p>");
+	}
+	
+	
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		super.doPut(req, resp);
+		resp.setContentType("text/html; charset=utf-8");
+		/*
+		 * [2]unit 		: ex) remotelight
+		 * [3]id 		: id
+		 */
+		HashMap<String, String> param = getPutParameter(req.getInputStream());
+		String[] command = req.getRequestURI().substring(1).split("/"); //remove empty command
+		
+		switch(CommonRESTUtil.expect(command, 2)) {
+		case "remotelight":
+			RemoteLightREST.putMain(req, resp, command, param);
+			break;
+		default :
+			PrintWriter out = resp.getWriter();
+			HashMap<String, String> resultMap = new HashMap<>();
+			CommonRESTUtil.initResultMap(resultMap, "false", null, invalidCommand);
+			out.println(CommonRESTUtil.mapJSON(resultMap));
 			break;
 		}
 		

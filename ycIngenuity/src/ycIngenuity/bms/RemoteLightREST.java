@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.microsoft.azure.sdk.iot.service.devicetwin.MethodResult;
 import ycIngenuity.bms.resourceUtil.BMS_Container;
+import ycIngenuity.bms.resourceUtil.RemoteLight;
 
 public class RemoteLightREST {
 	
@@ -15,19 +16,19 @@ public class RemoteLightREST {
 	static String lightoffMessage = "'Light Off' executed";
 	static String invalidCommand = "Invalid Command"; 
 
-	static void putMain(HttpServletRequest request, HttpServletResponse response, String[] command, HashMap<String, String> param) throws IOException {
-		PrintWriter out = response.getWriter();
+	static void putMain(HttpServletRequest req, HttpServletResponse resp, String[] command, HashMap<String, String> param) throws IOException {
+		PrintWriter out = resp.getWriter();
 		HashMap<String, String> resultMap = new HashMap<>();
 		/*
 		 * controller for remoteLight
 		 */
 		//It requires authorized account to control something
-		if(!CommonREST.checkValidAccount(param.get("email"), param.get("pw"))) {
+		if(!CommonRESTUtil.checkValidAccount(param.get("email"), param.get("pw"))) {
 			//failed to get authority
 			
 			String message = "Not a valid account";
-			CommonREST.initResultMap(resultMap, "false", null, message);
-			out.println(CommonREST.mapJSON(resultMap));
+			CommonRESTUtil.initResultMap(resultMap, "false", null, message);
+			out.println(CommonRESTUtil.mapJSON(resultMap));
 			return;
 		}
 		
@@ -37,37 +38,59 @@ public class RemoteLightREST {
 		case "lighton":
 			mr = BMS_Container.getRemoteLightManager().lightOn(device_id);
 			if(mr == null) {
-				CommonREST.initResultMap(resultMap, "false", null, null);
+				CommonRESTUtil.initResultMap(resultMap, "false", null, null);
 			}
 			else if (mr.getStatus() == 200) {
-				CommonREST.initResultMap(resultMap, "true", String.valueOf(200), lightonMessage);
+				CommonRESTUtil.initResultMap(resultMap, "true", String.valueOf(200), lightonMessage);
 			}
 			else {
 				
-				CommonREST.initResultMap(resultMap, "false", null, null);
+				CommonRESTUtil.initResultMap(resultMap, "false", null, null);
 			}
 			break;
 		case "lightoff":
 			mr = BMS_Container.getRemoteLightManager().lightOff(device_id);
 			if(mr == null) {
-				CommonREST.initResultMap(resultMap, "false", null, null);
+				CommonRESTUtil.initResultMap(resultMap, "false", null, null);
 			}
 			else if (mr.getStatus() == 200) {
-				CommonREST.initResultMap(resultMap, "true", String.valueOf(200), lightoffMessage);
+				CommonRESTUtil.initResultMap(resultMap, "true", String.valueOf(200), lightoffMessage);
 			}
 			else {
-				CommonREST.initResultMap(resultMap, "false", null, null);
+				CommonRESTUtil.initResultMap(resultMap, "false", null, null);
 			}
 			break;
 		default:
-			CommonREST.initResultMap(resultMap, "false", null, invalidCommand);
+			CommonRESTUtil.initResultMap(resultMap, "false", null, invalidCommand);
 			break;
 		}
 		
-		out.println(CommonREST.mapJSON(resultMap));
+		out.println(CommonRESTUtil.mapJSON(resultMap));
+		
+	}
+	
+	static void getMain(HttpServletRequest req, HttpServletResponse resp, String[] command) throws IOException {
+		PrintWriter out = resp.getWriter();
+		
+		//command[3] : id
+		String device_id = CommonRESTUtil.expect(command, 3);
+		
+		if(device_id == null) {
+			for (RemoteLight rl : BMS_Container.getRemoteLightManager().getResource()) {
+				out.println(rl.toJSON());
+			}
+		}
+		else {
+			RemoteLight rl = BMS_Container.getRemoteLightManager().findByDeviceID(device_id);
+			out.println(rl.toJSON());
+		}
+		
+		
+		
 		
 	}
 	
 	
+
 	
 }
