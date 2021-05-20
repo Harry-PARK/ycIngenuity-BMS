@@ -61,14 +61,13 @@ public class RestHandler extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-		super.doGet(req, resp);
 		resp.setContentType("text/html; charset=utf-8");
 		/*
 		 * [2]unit 		: ex) remotelight
 		 * [3]id 		: id
 		 */
 		String[] command = req.getRequestURI().substring(1).split("/");
-		switch(CommonRESTUtil.expect(command, 2)) {
+		switch(CommonRESTUtil.expect(command, 2) != null? command[2]:"") {
 		case "remotelight":
 			RemoteLightREST.getMain(req, resp, command);
 			break;
@@ -84,7 +83,6 @@ public class RestHandler extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-		super.doPost(req, resp);
 		resp.setContentType("text/html; charset=utf-8");
 		PrintWriter out = resp.getWriter();
 		out.println("<p>test post success</p>");
@@ -95,7 +93,6 @@ public class RestHandler extends HttpServlet{
 	
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-		super.doPut(req, resp);
 		resp.setContentType("text/html; charset=utf-8");
 		/*
 		 * [2]unit 		: ex) remotelight

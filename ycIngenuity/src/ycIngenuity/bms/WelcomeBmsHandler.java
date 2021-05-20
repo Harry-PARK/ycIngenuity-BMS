@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet(urlPatterns = "/bms")
-public class BmsWelcomeHandler extends HttpServlet {
+public class WelcomeBmsHandler extends HttpServlet {
 
 	/**
 	 * 
@@ -21,8 +21,8 @@ public class BmsWelcomeHandler extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		super.doGet(req, resp);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("");
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/welcomeBMS.jsp");
 		dispatcher.forward(req, resp);
 	}
 

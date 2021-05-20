@@ -17,6 +17,7 @@ public class CommonRESTUtil {
 		resultMap.put("status", status);
 		resultMap.put("message", message);
 		resultMap.put("cacheable", "non-cacheable");
+		//resultMap.put("Cache-Control", "no-cache");
 	}
 	
 	static String mapJSON(HashMap<String, String> map) {
