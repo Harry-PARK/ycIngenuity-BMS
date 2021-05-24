@@ -127,16 +127,16 @@ public class RemoteLight {
 	public String toJSON(){
 		StringBuilder info = new StringBuilder();
 		info.append("{");
-		info.append(" device_id:" + this.device_id + ",");
-		info.append(" connection_string:" + this.connection_string + ",");
-		info.append(" power_on:"+this.powerOn + ",");
-		info.append(" online:" + this.online + ",");
-		info.append(" last_updated:" + this.last_updated.getTime() + ",");
-		info.append(" installed_date:" + this.installed_date.getTime() + ",");
-		info.append(" building:" + this.building + ",");
-		info.append(" floor:" + this.floor + ",");
-		info.append(" room_name:" + this.room_name + ",");
-		info.append(" room_code:" + this.room_code);
+		info.append("device_id:" + this.device_id + ",");
+		info.append("connection_string:" + this.connection_string + ",");
+		info.append("power_on:"+this.powerOn + ",");
+		info.append("online:" + this.online + ",");
+		info.append("last_updated:" + this.last_updated.getTime() + ",");
+		info.append("installed_date:" + this.installed_date.getTime() + ",");
+		info.append("building:" + this.building + ",");
+		info.append("floor:" + this.floor + ",");
+		info.append("room_name:" + this.room_name + ",");
+		info.append("room_code:" + this.room_code);
 		info.append("}");
 		return info.toString();
 	}
