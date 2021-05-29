@@ -11,10 +11,37 @@
 	float: left;
 }
 
+#switchList{
+	 list-style-type :none;
+	 padding-left:0px;
+}
+
 .switchBox{
 	width : 280px;
 	height: 150px;
 	background-color:green;
+	border : 1px black solid;
+	display:flex;
+	
+}
+
+.switchImg{
+	width : 100px;
+	height : 120px;
+}
+
+.switchInfo{
+	padding-left:10px;
+}
+
+.switchInfo p{
+	margin-top:3px;
+	margin-bottom:2px;
+}
+
+.lastup{
+	font-size:15px;
+	color:rgba(40, 40, 40, 0.8);
 }
 
 #monitor{
@@ -63,7 +90,7 @@
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: MediumSeaGreen;
 }
 
 input:focus + .slider {
