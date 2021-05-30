@@ -11,7 +11,7 @@ public class RemoteLight {
 	private String connection_string;
 	
 	//control info
-	private Boolean powerOn; //on off
+	private Boolean light; //on off
 	private Boolean online; // connected
 	private Date last_updated;
 	
@@ -28,7 +28,7 @@ public class RemoteLight {
 		if(data.length == fieldNum) {
 			setDevice_id(data[0]);
 			setConnection_string(data[1]);
-			setPowerOnByString(data[2]);
+			setLightByString(data[2]);
 			setOnlineByString(data[3]);
 			if(data[4].equals("0")) {
 				//0 for new device registry
@@ -63,15 +63,15 @@ public class RemoteLight {
 	private void setConnection_string(String connection_string) {
 		this.connection_string = connection_string;
 	}
-	public Boolean getPowerOn() {
-		return powerOn;
+	public Boolean getLight() {
+		return light;
 	}
-	public void setPowerOnByString(String powerOn) {
+	public void setLightByString(String powerOn) {
 		if (powerOn.equals("true")) {
-			this.powerOn = true;
+			this.light = true;
 		}
 		else {
-			this.powerOn = false;
+			this.light = false;
 		}
 	}
 	public Boolean getOnline() {
@@ -129,7 +129,7 @@ public class RemoteLight {
 		info.append("{");
 		info.append("device_id:" + this.device_id + ",");
 		info.append("connection_string:" + this.connection_string + ",");
-		info.append("power_on:"+this.powerOn + ",");
+		info.append("power_on:"+this.light + ",");
 		info.append("online:" + this.online + ",");
 		info.append("last_updated:" + this.last_updated.getTime() + ",");
 		info.append("installed_date:" + this.installed_date.getTime() + ",");
@@ -151,7 +151,7 @@ public class RemoteLight {
 		StringBuilder csv = new StringBuilder();
 		csv.append(this.device_id +",");
 		csv.append(this.connection_string +",");
-		csv.append(this.powerOn +",");
+		csv.append(this.light +",");
 		csv.append(this.online +",");
 		csv.append(this.last_updated.getTime() +",");
 		csv.append(this.installed_date.getTime() +",");

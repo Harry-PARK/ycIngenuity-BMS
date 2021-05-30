@@ -1,29 +1,35 @@
 /**
  * 
  */
-const RemoteLight = function(){};
+const RemoteLight = function() { };
 
-const jsonParse = function(data){
+const jsonParse = function(data, type) {
 	var jsonList = [];
-	for(var i = 0; i < data.length; i++ ){
+	for (let i = 0; i < data.length; i++) {
 		var start;
 		var end;
-		if(data[i] == "{"){
+		if (data[i] == "{") {
 			start = ++i;
-			while(data[i] != "}"){
+			while (data[i] != "}") {
 				i++
 			}
 			end = i++;
+		var temp;
+		if(type == "remotelight"){
+			temp = new RemoteLight();
 		}
-		var temp = new RemoteLight();
+		else{
+			temp = new Object();
+		}
 		var item = data.substring(start, end);
 		tokens = item.split(",");
-		for(var token in tokens){
+		for (var token in tokens) {
 			token = tokens[token];
 			var token = token.split(":");
 			temp[token[0]] = token[1];
 		}
 		jsonList.push(temp);
+		}
 	}
 	return jsonList;
 };

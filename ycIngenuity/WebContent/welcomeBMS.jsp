@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -12,36 +12,38 @@
 </head>
 
 <body>
-<div class="topBanner">	
-</div>
+	<div class="topBanner"></div>
 
-<div id="main">
+	<div id="main">
 
-	<section id="switchPanel">
-		<ul id="switchList">
-		
-		<li>
-		<div class="switchBox"> <!-- switch box -->
-			<img class="switchImg" src="resources/image/off.jpg" alt="bulb image">
-			
-			<div class="switchInfo">
-			<p>#2</p>
-			<p>LAB3 (I203)</p>
-			<p>[Industry]</p>
-			<p class="lastup">last updated : 1 min ago..</p>
-			<label class="switch"><input type="checkbox"><span class="slider round"></span></label>
-			
-			</div>
+		<section id="switchPanel">
+			<ul id="switchList">
+
+				<li>
+					<div class="switchBox">
+						<!-- switch box -->
+						<img class="switchImg" src="resources/image/off.jpg"
+							alt="bulb image">
+
+						<div class="switchInfo">
+							<p>#2</p>
+							<p>LAB3 (I203)<span class="dot" style="background-color:DarkRed;"></span></p>
+							<p>[Industry]</p>
+							<p class="lastup">last updated : 1 min ago..</p>
+							<label class="switch"><input type="checkbox"><span class="slider round"></span></label>
+
+						</div>
+					</div>
+				</li>
+
+
+			</ul>
+		</section>
+
+		<div id="monitor">
+			<!-- monitor -->
 		</div>
-		</li>
-		
-		
-		</ul>
-	</section>
-	
-	<div id="monitor"> <!-- monitor -->
 	</div>
-</div>
 </body>
 
 <script src="js/welcomeBMSLoad.js"></script>
