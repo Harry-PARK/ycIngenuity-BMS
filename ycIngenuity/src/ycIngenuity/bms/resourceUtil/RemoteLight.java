@@ -129,7 +129,7 @@ public class RemoteLight {
 		info.append("{");
 		info.append("device_id:" + this.device_id + ",");
 		info.append("connection_string:" + this.connection_string + ",");
-		info.append("power_on:"+this.light + ",");
+		info.append("light:"+this.light + ",");
 		info.append("online:" + this.online + ",");
 		info.append("last_updated:" + this.last_updated.getTime() + ",");
 		info.append("installed_date:" + this.installed_date.getTime() + ",");

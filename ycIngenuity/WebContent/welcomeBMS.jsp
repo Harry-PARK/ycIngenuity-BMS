@@ -18,22 +18,21 @@
 
 		<section id="switchPanel">
 			<ul id="switchList">
-
 				<li>
-					<div class="switchBox">
+				
+					<div class="switchBox" id="id">
 						<!-- switch box -->
-						<img class="switchImg" src="resources/image/off.jpg"
-							alt="bulb image">
-
+						<img class="switchImg" src="resources/image/off.jpg"alt="bulb image">
 						<div class="switchInfo">
 							<p>#2</p>
 							<p>LAB3 (I203)<span class="dot" style="background-color:DarkRed;"></span></p>
 							<p>[Industry]</p>
 							<p class="lastup">last updated : 1 min ago..</p>
-							<label class="switch"><input type="checkbox"><span class="slider round"></span></label>
+							<label class="switch"><input class="toSwitch" type="checkbox"><span class="slider round"></span></label>
 
 						</div>
 					</div>
+					
 				</li>
 
 
