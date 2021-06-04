@@ -153,14 +153,14 @@ $.ajax({
 
 
 //To test updateSwitchHTML => looks good!
-setTimeout(function(){
+/*setTimeout(function(){
 	remotelight = remoteLightList[0];
 		remotelight.light = "true";
 		remotelight.online = "true";
 		remotelight.last_updated =  (new Date()).getTime();
 		updateSwitchHTML(remotelight);
 	}, 5000);
-
+*/
 
 
 

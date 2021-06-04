@@ -1,6 +1,7 @@
 package ycIngenuity.bms.resourceUtil;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 public class RemoteLight {
 	
@@ -13,10 +14,10 @@ public class RemoteLight {
 	//control info
 	private Boolean light; //on off
 	private Boolean online; // connected
-	private Date last_updated;
+	private LocalDateTime last_updated;
 	
 	//install info
-	private Date installed_date;
+	private LocalDateTime installed_date;
 	private String building;
 	private String floor;
 	private String room_name;
@@ -32,14 +33,14 @@ public class RemoteLight {
 			setOnlineByString(data[3]);
 			if(data[4].equals("0")) {
 				//0 for new device registry
-				last_updated = new Date();
+				last_updated = LocalDateTime.now();
 			}
 			else {
 				setLast_updatedByString(data[4]);
 			}
 			if(data[5].equals("0")) {
 				//0 for new device registry
-				installed_date = new Date();
+				installed_date = LocalDateTime.now();
 			}
 			else {
 				setInstalled_dateByString(data[5]);
@@ -85,19 +86,20 @@ public class RemoteLight {
 			this.online = false;
 		}
 	}
-	public Date getLast_updated() {
+	public LocalDateTime getLast_updated() {
 		return last_updated;
 	}
-	public void setLast_updatedByString(String last_updated) {
-		Long stime = Long.parseLong(last_updated);
-		this.last_updated = new Date(stime);
+	public void renewLast_updated() {
+		this.last_updated = LocalDateTime.now();
 	}
-	public Date getInstalled_date() {
+	public void setLast_updatedByString(String last_updated) {
+		this.last_updated = LocalDateTime.parse(last_updated);
+	}
+	public LocalDateTime getInstalled_date() {
 		return installed_date;
 	}
 	public void setInstalled_dateByString(String installed_date) {
-		Long stime = Long.parseLong(installed_date);
-		this.installed_date = new Date(stime);
+		this.installed_date = LocalDateTime.parse(installed_date);
 	}
 	public String getBuilding() {
 		return building;
@@ -131,8 +133,8 @@ public class RemoteLight {
 		info.append("connection_string:" + this.connection_string + ",");
 		info.append("light:"+this.light + ",");
 		info.append("online:" + this.online + ",");
-		info.append("last_updated:" + this.last_updated.getTime() + ",");
-		info.append("installed_date:" + this.installed_date.getTime() + ",");
+		info.append("last_updated:" + this.last_updated.toString() + ",");
+		info.append("installed_date:" + this.installed_date.toString() + ",");
 		info.append("building:" + this.building + ",");
 		info.append("floor:" + this.floor + ",");
 		info.append("room_name:" + this.room_name + ",");
@@ -153,8 +155,8 @@ public class RemoteLight {
 		csv.append(this.connection_string +",");
 		csv.append(this.light +",");
 		csv.append(this.online +",");
-		csv.append(this.last_updated.getTime() +",");
-		csv.append(this.installed_date.getTime() +",");
+		csv.append(this.last_updated.toString() +",");
+		csv.append(this.installed_date.toString() +",");
 		csv.append(this.building +",");
 		csv.append(this.floor +",");
 		csv.append(this.room_name +",");

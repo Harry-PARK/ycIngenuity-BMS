@@ -54,6 +54,7 @@ public class RemoteLightResourceManager extends ResourceManager<RemoteLight>{
 		MethodResult result = sendDirectMethod(light, lightOn, null);
 		if(result != null && result.getStatus() == 200) {
 			light.setLightByString("true");
+			light.renewLast_updated();
 		}
 		return result;
 	}
@@ -62,6 +63,7 @@ public class RemoteLightResourceManager extends ResourceManager<RemoteLight>{
 		MethodResult result = sendDirectMethod(light, lightOff, null);
 		if(result != null && result.getStatus() == 200) {
 			light.setLightByString("false");
+			light.renewLast_updated();
 		}
 		return result;
 	}

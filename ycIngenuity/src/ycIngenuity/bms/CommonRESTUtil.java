@@ -33,6 +33,7 @@ public class CommonRESTUtil {
 		return json.toString();
 	}
 	
+	//return index value, or null
 	static String expect(String[] command, int index) {
 		return command.length>index?command[index]:null;
 	}
