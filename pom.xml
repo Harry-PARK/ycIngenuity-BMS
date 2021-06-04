@@ -19,17 +19,12 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
 				<version>3.2.3</version>
 				<configuration>
 					<warSourceDirectory>WebContent</warSourceDirectory>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
-			</plugin>
-			<plugin>            
-			  <groupId>org.apache.maven.plugins</groupId>
-			  <artifactId>maven-war-plugin</artifactId>
-			  <configuration>
-			    <failOnMissingWebXml>false</failOnMissingWebXml>        
-			  </configuration>
 			</plugin>
 		</plugins>
 	</build>
