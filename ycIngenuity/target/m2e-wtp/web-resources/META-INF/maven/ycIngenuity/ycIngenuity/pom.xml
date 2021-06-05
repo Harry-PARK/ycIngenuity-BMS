@@ -19,17 +19,12 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
 				<version>3.2.3</version>
 				<configuration>
 					<warSourceDirectory>WebContent</warSourceDirectory>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
-			</plugin>
-			<plugin>            
-			  <groupId>org.apache.maven.plugins</groupId>
-			  <artifactId>maven-war-plugin</artifactId>
-			  <configuration>
-			    <failOnMissingWebXml>false</failOnMissingWebXml>        
-			  </configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -42,5 +37,13 @@
 			<artifactId>iot-service-client</artifactId>
 			<version>1.13.0</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat -->
+		<dependency>
+		    <groupId>org.apache.tomcat</groupId>
+		    <artifactId>tomcat</artifactId>
+		    <version>9.0.1</version>
+		    <type>pom</type>
+		</dependency>
+		
 	</dependencies>
 </project>
