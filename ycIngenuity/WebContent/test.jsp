@@ -17,11 +17,12 @@
 <script type="text/javascript">
 	$.ajax({
 		type: 'PUT',
-		url:"/ycIngenuityBMS/restful/remotelight/azuretest",
+		url:"/ycIngenuityBMS/restful/remotelight/lab1",
         data : {
-        	email:"airroket@naver.com",
-        	pw:"asdf",
-        	command : "lighton"
+        	"light":"1",
+        	"email" : "device_lab1",
+        	"pw" : "lab1",
+        	"command" : "update"
         },
 	}).done(function(data) {
 	    alert(data);

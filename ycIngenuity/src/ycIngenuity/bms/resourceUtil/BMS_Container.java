@@ -13,9 +13,8 @@ public class BMS_Container {
 	
 	static {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -30,16 +29,16 @@ public class BMS_Container {
 	
 	//RemoteLight Resource
 	private static String shareAccessKeyToAzure = "HostName=ycbms.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=dIlYN60BHpa3HN/i+nXzgRy1LkfflxIcAw9leJIXbRY=";
-	private static ResourceSLU<RemoteLight> txtRLFS= new RemoteLightDBSystem();
-	private static RemoteLightResourceManager rlm = new RemoteLightResourceManager(txtRLFS, shareAccessKeyToAzure);
+	private static ResourceSLU<RemoteLight> RLDFS= new RemoteLightDBSystem();
+	private static RemoteLightResourceManager rlm = new RemoteLightResourceManager(RLDFS, shareAccessKeyToAzure);
 	public static RemoteLightResourceManager getRemoteLightManager(){
 		return rlm;
 	}
 
 	
 	//Account Resource
-	private static ResourceSLU<Account> txtAFS = new AccountDBSystem();
-	private static AccountResourceManager am = new AccountResourceManager(txtAFS);
+	private static ResourceSLU<Account> ADFS = new AccountDBSystem();
+	private static AccountResourceManager am = new AccountResourceManager(ADFS);
 	public static AccountResourceManager getAccountRsourceManager(){
 		return am;
 	}

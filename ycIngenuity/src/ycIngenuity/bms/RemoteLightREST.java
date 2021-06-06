@@ -16,6 +16,7 @@ public class RemoteLightREST {
 	static String msg_lightoff = "'Light Off' executed";
 	static String msg_invalidCommand = "Invalid Command"; 
 	static String msg_invalidRESTCONKEY = "Invalid RESTCONKEY";
+	static String msg_notValidAccount = "Not a valid account";
 
 	static void putMain(HttpServletRequest req, HttpServletResponse resp, String[] command, HashMap<String, String> param) throws IOException {
 		PrintWriter out = resp.getWriter();
@@ -26,9 +27,7 @@ public class RemoteLightREST {
 		//It requires authorized account to control something
 		if(!CommonRESTUtil.checkValidAccount(param.get("email"), param.get("pw"))) {
 			//failed to get authority
-			
-			String message = "Not a valid account";
-			CommonRESTUtil.initResultMap(resultMap, "false", null, message);
+			CommonRESTUtil.initResultMap(resultMap, "false", null, msg_notValidAccount);
 			out.println(CommonRESTUtil.mapJSON(resultMap));
 			return;
 		}
@@ -63,15 +62,9 @@ public class RemoteLightREST {
 			}
 			break;
 		case "update":
-			if(param.get("RESTCONKEY").equals(RemoteLight.RESTCONKEY)) {
-				int lightOnOff = Integer.parseInt(param.get("light"));
-				BMS_Container.getRemoteLightManager().update(device_id, lightOnOff);
-				CommonRESTUtil.initResultMap(resultMap, "true", String.valueOf(200), null);
-				break;
-			}
-			else {
-				CommonRESTUtil.initResultMap(resultMap, "false", null, msg_invalidRESTCONKEY);
-			}
+			int lightOnOff = Integer.parseInt(param.get("light"));
+			BMS_Container.getRemoteLightManager().update(device_id, lightOnOff);
+			CommonRESTUtil.initResultMap(resultMap, "true", String.valueOf(200), null);
 			break;
 		default:
 			CommonRESTUtil.initResultMap(resultMap, "false", null, msg_invalidCommand);

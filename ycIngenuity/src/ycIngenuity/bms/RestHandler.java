@@ -100,7 +100,7 @@ public class RestHandler extends HttpServlet{
 		 */
 		HashMap<String, String> param = getPutParameter(req.getInputStream());
 		String[] command = req.getRequestURI().substring(1).split("/"); //remove empty command
-		
+		System.out.println("requested");
 		switch(CommonRESTUtil.expect(command, 2)) {
 		case "remotelight":
 			RemoteLightREST.putMain(req, resp, command, param);

@@ -7,9 +7,7 @@ import java.time.ZonedDateTime;
 
 
 public class RemoteLight {
-	
-	public static String RESTCONKEY = "azurecloud";
-	
+
 	//connection info
 	private String device_id;
 	private String connection_string;
