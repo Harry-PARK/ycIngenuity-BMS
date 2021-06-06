@@ -159,7 +159,7 @@ $.ajax({
 //To test updateSwitchHTML => looks good!
 setInterval(function(){
 		updateSwitchList();
-		for(var rl of updateSwitchList){
+		for(var rl of remoteLightList){
 			updateSwitchHTML(rl);	
 		}
 	}, 1000);
