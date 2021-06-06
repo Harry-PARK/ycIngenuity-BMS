@@ -10,6 +10,15 @@ public class BMS_Container {
 	//Purpose of this class is to make static object
 	
 	//Database Info Configuration
+	
+	static {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	private static String db_url = "jdbc:mysql://ycbmsdb.mysql.database.azure.com:3306/ycbms";
 	private static String db_user = "jingyu@ycbmsdb";
 	private static String db_pw = "Asdp1234";
