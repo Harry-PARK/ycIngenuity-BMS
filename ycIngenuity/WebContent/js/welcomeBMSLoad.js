@@ -19,7 +19,7 @@ const registerSwitchEvent = function() {
 			$.ajax({
 				type: 'PUT',
 				//TODO : get id from html tag
-				url: "/ycIngenuityBMS/restful/remotelight/"+device_id,
+				url: "/ycibms/restful/remotelight/"+device_id,
 				data: {
 					email: _email,
 					pw: _pw,
@@ -131,7 +131,7 @@ const updateSwitchHTML = function(remotelight){
 const updateSwitchList = function() {
 	$.ajax({
 		type: 'GET',
-		url: "/ycIngenuityBMS/restful/remotelight"
+		url: "/ycibms/restful/remotelight"
 	}).done(function(data) {
 		remoteLightList = jsonParse(data, "remotelight");
 		
@@ -142,7 +142,7 @@ const updateSwitchList = function() {
 //import remotelight switch panel
 $.ajax({
 	type: 'GET',
-	url: "/ycIngenuityBMS/restful/remotelight"
+	url: "/ycibms/restful/remotelight"
 }).done(function(data) {
 	remoteLightList = jsonParse(data, "remotelight");
 	for (var rl of remoteLightList) {
