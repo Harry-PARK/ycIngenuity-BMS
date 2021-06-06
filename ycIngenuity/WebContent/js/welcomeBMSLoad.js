@@ -6,7 +6,8 @@ let remoteLightList = [];
 const _email = "airroket@naver.com";
 const _pw = "asdf";
 const _onImg = "resources/image/on.jpg";
-const _offImg = "resources/image/off.jpg"
+const _offImg = "resources/image/off.jpg";
+const _host = "/ycibms-2021";
 
 const registerSwitchEvent = function() {
 	var nodeList = document.querySelectorAll('input[type="checkbox"]');
@@ -19,7 +20,7 @@ const registerSwitchEvent = function() {
 			$.ajax({
 				type: 'PUT',
 				//TODO : get id from html tag
-				url: "/ycibms-2021/restful/remotelight/"+device_id,
+				url: _host+"/restful/remotelight/"+device_id,
 				data: {
 					email: _email,
 					pw: _pw,
@@ -87,28 +88,31 @@ const displayLastUpdated = function(time) {
 
 const rltDisplayHTML = function(remotelight) {
 	console.log(remotelight);
-	html = "";
-	html += "<li>";
-	html += "	<div class='switchBox' id='"+remotelight.device_id+"'> <!-- switch box -->";
 	var rlImg = _offImg;
 	if (remotelight.light == "true") {
 		rlImg = _onImg;
 	}
-	html += "		<img class='switchImg' src='"+rlImg+"' alt='bulb image'>		";
-	html += "		<div class='switchInfo'>";
-	html += "		<p>#" + remotelight.floor + "</p>";
-	html += "		<p>" + remotelight.room_name + " (" + remotelight.room_code + ")";
 	var onlineColor = "DarkRed";
 	if (remotelight.online == "true") {
 		onlineColor = "MediumSeaGreen";
 	}
+	var check = "";
+	if(remotelight.light == "true"){
+		check = "checked";
+	}
+	html = "";
+	html += "<li>";
+	html += "	<div class='switchBox' id='"+remotelight.device_id+"'> <!-- switch box -->";
+	
+	html += "		<img class='switchImg' src='"+rlImg+"' alt='bulb image'>		";
+	html += "		<div class='switchInfo'>";
+	html += "		<p>#" + remotelight.floor + "</p>";
+	html += "		<p>" + remotelight.room_name + " (" + remotelight.room_code + ")";
+	
 	html += "			<span class='dot' style='background-color:" + onlineColor + ";'></span></p>";
 	html += "		<p>[" + remotelight.building + "]</p>";
 	html += "		<p class='lastup'>" + displayLastUpdated(remotelight.last_updated) + "</p>";
-	var check = "";
-	if(remotelight.lgiht == "true"){
-		check = "checked";
-	}
+	
 	html += '		<label class="switch"><input class="toSwitch" type="checkbox" '+check+'><span class="slider round"></span></label>	';
 	html += "		</div>";
 	html += "	</div>";
@@ -131,7 +135,7 @@ const updateSwitchHTML = function(remotelight){
 const updateSwitchList = function() {
 	$.ajax({
 		type: 'GET',
-		url: "/ycibms-2021/restful/remotelight"
+		url: _host+"/restful/remotelight"
 	}).done(function(data) {
 		remoteLightList = jsonParse(data, "remotelight");
 		
@@ -142,7 +146,7 @@ const updateSwitchList = function() {
 //import remotelight switch panel
 $.ajax({
 	type: 'GET',
-	url: "/ycibms-2021/restful/remotelight"
+	url: _host+"/restful/remotelight"
 }).done(function(data) {
 	remoteLightList = jsonParse(data, "remotelight");
 	for (var rl of remoteLightList) {
