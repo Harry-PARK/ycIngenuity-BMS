@@ -12,9 +12,10 @@ import ycIngenuity.bms.resourceUtil.RemoteLight;
 
 public class RemoteLightREST {
 	
-	static String lightonMessage = "'Light On' executed";
-	static String lightoffMessage = "'Light Off' executed";
-	static String invalidCommand = "Invalid Command"; 
+	static String msg_lighton = "'Light On' executed";
+	static String msg_lightoff = "'Light Off' executed";
+	static String msg_invalidCommand = "Invalid Command"; 
+	static String msg_invalidRESTCONKEY = "Invalid RESTCONKEY";
 
 	static void putMain(HttpServletRequest req, HttpServletResponse resp, String[] command, HashMap<String, String> param) throws IOException {
 		PrintWriter out = resp.getWriter();
@@ -32,6 +33,7 @@ public class RemoteLightREST {
 			return;
 		}
 		
+		try {
 		String device_id = command[3];
 		MethodResult mr;
 		switch(param.get("command")) {
@@ -41,7 +43,7 @@ public class RemoteLightREST {
 				CommonRESTUtil.initResultMap(resultMap, "false", null, null);
 			}
 			else if (mr.getStatus() == 200) {
-				CommonRESTUtil.initResultMap(resultMap, "true", String.valueOf(200), lightonMessage);
+				CommonRESTUtil.initResultMap(resultMap, "true", String.valueOf(200), msg_lighton);
 			}
 			else {
 				
@@ -54,19 +56,33 @@ public class RemoteLightREST {
 				CommonRESTUtil.initResultMap(resultMap, "false", null, null);
 			}
 			else if (mr.getStatus() == 200) {
-				CommonRESTUtil.initResultMap(resultMap, "true", String.valueOf(200), lightoffMessage);
+				CommonRESTUtil.initResultMap(resultMap, "true", String.valueOf(200), msg_lightoff);
 			}
 			else {
 				CommonRESTUtil.initResultMap(resultMap, "false", null, null);
 			}
 			break;
+		case "update":
+			if(param.get("RESTCONKEY").equals(RemoteLight.RESTCONKEY)) {
+				int lightOnOff = Integer.parseInt(param.get("light"));
+				BMS_Container.getRemoteLightManager().update(device_id, lightOnOff);
+				CommonRESTUtil.initResultMap(resultMap, "true", String.valueOf(200), null);
+				break;
+			}
+			else {
+				CommonRESTUtil.initResultMap(resultMap, "false", null, msg_invalidRESTCONKEY);
+			}
+			break;
 		default:
-			CommonRESTUtil.initResultMap(resultMap, "false", null, invalidCommand);
+			CommonRESTUtil.initResultMap(resultMap, "false", null, msg_invalidCommand);
 			break;
 		}
 		
 		out.println(CommonRESTUtil.mapJSON(resultMap));
-		
+		}
+		catch(Exception e) {
+			CommonRESTUtil.initResultMap(resultMap, "false", null, e.getMessage());
+		}
 	}
 	
 	static void getMain(HttpServletRequest req, HttpServletResponse resp, String[] command) throws IOException {

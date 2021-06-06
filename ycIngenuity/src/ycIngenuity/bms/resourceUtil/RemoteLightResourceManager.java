@@ -23,20 +23,20 @@ public class RemoteLightResourceManager extends ResourceManager<RemoteLight>{
 		shareAccessKeyToAzure = saka;
 	}
 	
-	public RemoteLight findByDeviceID(String device_id) {
+	public RemoteLight findByDeviceID(String device_id) throws DeviceNotFoundException{
 		for (RemoteLight light : resourceList) {
 			if(device_id.equals(light.getDevice_id())){
 				return light;
 			}			
 		}
-		return null;
+		throw new DeviceNotFoundException();
 		
 	}
 	
 	public MethodResult lightOn(RemoteLight light) {
 		return lightOnMethod(light);
 	}
-	public MethodResult lightOn(String device_id) {
+	public MethodResult lightOn(String device_id) throws DeviceNotFoundException{
 		RemoteLight light = findByDeviceID(device_id);
 		return lightOnMethod(light);
 	}
@@ -44,16 +44,24 @@ public class RemoteLightResourceManager extends ResourceManager<RemoteLight>{
 	public MethodResult lightOff(RemoteLight light) {
 		return lightOffMethod(light);
 	}
-	public MethodResult lightOff(String device_id) {
+	public MethodResult lightOff(String device_id) throws DeviceNotFoundException{
 		RemoteLight light = findByDeviceID(device_id);
 		return lightOffMethod(light);
+	}
+	
+	public void update(RemoteLight light, int lightOnOff) {
+		updateMethod(light, lightOnOff);
+	}
+	public void update(String device_id, int lightOnOff) throws DeviceNotFoundException{
+		RemoteLight light = findByDeviceID(device_id);
+		updateMethod(light, lightOnOff);
 	}
 	
 	
 	private MethodResult lightOnMethod(RemoteLight light) {
 		MethodResult result = sendDirectMethod(light, lightOn, null);
 		if(result != null && result.getStatus() == 200) {
-			light.setLightByString("true");
+			light.setLightByInteger(1);
 			light.renewLast_updated();
 		}
 		return result;
@@ -62,10 +70,16 @@ public class RemoteLightResourceManager extends ResourceManager<RemoteLight>{
 	private MethodResult lightOffMethod(RemoteLight light) {
 		MethodResult result = sendDirectMethod(light, lightOff, null);
 		if(result != null && result.getStatus() == 200) {
-			light.setLightByString("false");
+			light.setLightByInteger(0);
 			light.renewLast_updated();
 		}
 		return result;
+	}
+	
+	private void updateMethod(RemoteLight light, int lightOnOff) {
+		light.setLightByInteger(lightOnOff);
+		light.setOnline(true);
+		light.renewLast_updated();
 	}
 	
 	public MethodResult sendDirectMethod(RemoteLight light, String methodName, Object payload) {

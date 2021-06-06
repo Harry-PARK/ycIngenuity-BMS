@@ -1,11 +1,14 @@
 package ycIngenuity.bms.resourceUtil;
 
+import java.sql.ResultSet;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 
 public class RemoteLight {
 	
-	private int fieldNum = 10;
+	public static String RESTCONKEY = "azurecloud";
 	
 	//connection info
 	private String device_id;
@@ -19,36 +22,27 @@ public class RemoteLight {
 	//install info
 	private LocalDateTime installed_date;
 	private String building;
-	private String floor;
+	private int floor;
 	private String room_name;
 	private String room_code;
 	
 
 	
-	public RemoteLight(String[] data) {
-		if(data.length == fieldNum) {
-			setDevice_id(data[0]);
-			setConnection_string(data[1]);
-			setLightByString(data[2]);
-			setOnlineByString(data[3]);
-			if(data[4].equals("0")) {
-				//0 for new device registry
-				last_updated = LocalDateTime.now();
-			}
-			else {
-				setLast_updatedByString(data[4]);
-			}
-			if(data[5].equals("0")) {
-				//0 for new device registry
-				installed_date = LocalDateTime.now();
-			}
-			else {
-				setInstalled_dateByString(data[5]);
-			}
-			setBuilding(data[6]);
-			setFloor(data[7]);
-			setRoom_name(data[8]);
-			setRoom_code(data[9]);
+	public RemoteLight(ResultSet rs) {
+		try {
+			setDevice_id(rs.getString("device_id"));
+			setConnection_string(rs.getString("connection_string"));
+			setLightByInteger(rs.getInt("light"));
+			setOnlineByInteger(rs.getInt("online"));
+			setLast_updatedByString(rs.getString("last_updated"));
+			setInstalled_dateByString(rs.getString("installed_date"));
+			setBuilding(rs.getString("building"));
+			setFloor(rs.getInt("floor"));
+			setRoom_name(rs.getString("room_name"));
+			setRoom_code(rs.getString("room_code"));
+		}
+		catch(Exception e) {
+			e.getStackTrace();
 		}
 	}
 	
@@ -67,8 +61,11 @@ public class RemoteLight {
 	public Boolean getLight() {
 		return light;
 	}
-	public void setLightByString(String powerOn) {
-		if (powerOn.equals("true")) {
+	public void setLight(Boolean light) {
+		this.light = light;
+	}
+	public void setLightByInteger(int light) {
+		if (light == 1) {
 			this.light = true;
 		}
 		else {
@@ -78,8 +75,11 @@ public class RemoteLight {
 	public Boolean getOnline() {
 		return online;
 	}
-	public void setOnlineByString(String online) {
-		if (online.equals("true")) {
+	public void setOnline(Boolean online) {
+		this.online = online;
+	}
+	public void setOnlineByInteger(int online) {
+		if (online == 1) {
 			this.online = true;
 		}
 		else {
@@ -93,13 +93,13 @@ public class RemoteLight {
 		this.last_updated = LocalDateTime.now();
 	}
 	public void setLast_updatedByString(String last_updated) {
-		this.last_updated = LocalDateTime.parse(last_updated);
+		this.last_updated = LocalDateTime.parse(last_updated.replace(" ", "T"));
 	}
 	public LocalDateTime getInstalled_date() {
 		return installed_date;
 	}
 	public void setInstalled_dateByString(String installed_date) {
-		this.installed_date = LocalDateTime.parse(installed_date);
+		this.installed_date = LocalDateTime.parse(installed_date.replace(" ", "T"));
 	}
 	public String getBuilding() {
 		return building;
@@ -107,10 +107,10 @@ public class RemoteLight {
 	public void setBuilding(String building) {
 		this.building = building;
 	}
-	public String getFloor() {
+	public int getFloor() {
 		return floor;
 	}
-	public void setFloor(String floor) {
+	public void setFloor(int floor) {
 		this.floor = floor;
 	}
 	public String getRoom_name() {
@@ -127,14 +127,16 @@ public class RemoteLight {
 	}
 	
 	public String toJSON(){
+		long lu = (ZonedDateTime.of(last_updated, ZoneId.systemDefault())).toInstant().toEpochMilli();
+		long insd = (ZonedDateTime.of(installed_date, ZoneId.systemDefault())).toInstant().toEpochMilli();
 		StringBuilder info = new StringBuilder();
 		info.append("{");
 		info.append("device_id:" + this.device_id + ",");
 		info.append("connection_string:" + this.connection_string + ",");
 		info.append("light:"+this.light + ",");
 		info.append("online:" + this.online + ",");
-		info.append("last_updated:" + this.last_updated.toString() + ",");
-		info.append("installed_date:" + this.installed_date.toString() + ",");
+		info.append("last_updated:" + lu + ",");
+		info.append("installed_date:" + insd + ",");
 		info.append("building:" + this.building + ",");
 		info.append("floor:" + this.floor + ",");
 		info.append("room_name:" + this.room_name + ",");

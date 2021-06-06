@@ -1,21 +1,27 @@
 package ycIngenuity.bms.resourceUtil;
 
+import java.sql.ResultSet;
+
 public class Account {
 	
-	private int fieldNum = 2;
-	
 	private String email;
-	private String pw;
+	private String password;
+	private String name;
 	
 	
 	public Account() {
 	}
 	
-	public Account(String[] data) {
-		if(data.length == fieldNum) {
-			setEmail(data[0]);
-			setPw(data[1]);
+	public Account(ResultSet rs) {
+		try {
+			setEmail(rs.getString("email"));
+			setPassword(rs.getString("password"));
+			setName(rs.getString("name"));
 		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 	
@@ -25,18 +31,26 @@ public class Account {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPw() {
-		return pw;
+	public String getPassword() {
+		return password;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public String toJSON() {
 		StringBuilder info = new StringBuilder();
 		info.append("{");
-		info.append(" Email:" + email + ",");
-		info.append(" Pw:" + pw + ",");
+		info.append("email:" + email + ",");
+		info.append("pw:" + password + ",");
+		info.append("name:"+name);
+		info.append("}");
 		return info.toString();
 	}
 	
@@ -48,9 +62,12 @@ public class Account {
 	public String toCSV() {
 		StringBuilder csv = new StringBuilder();
 		csv.append(email +",");
-		csv.append(pw);
+		csv.append(password+",");
+		csv.append(name);
 		return csv.toString();
 	}
+
+
 	
 	
 }
