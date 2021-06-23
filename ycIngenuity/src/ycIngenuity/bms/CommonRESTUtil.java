@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ycIngenuity.bms.resourceUtil.BMS_Container;
+import ycIngenuity.bms.resourceUtil.LogOne;
 
 public class CommonRESTUtil {
 	
@@ -11,13 +12,25 @@ public class CommonRESTUtil {
 		return BMS_Container.getAccountRsourceManager().checkIDPW(email, pw);
 	}
 	
-	static void initResultMap(HashMap<String, String> resultMap, String success, String status, String message){
+	static void initResultMap(
+			HashMap<String, String> resultMap, 
+			Boolean success, 
+			int status, 
+			String message,
+			LogOne log
+			){
 		//each component indicates json property
-		resultMap.put("success", success);
-		resultMap.put("status", status);
+		resultMap.put("success", ""+success);
+		resultMap.put("status", String.valueOf(status));
 		resultMap.put("message", message);
 		resultMap.put("cacheable", "non-cacheable");
 		//resultMap.put("Cache-Control", "no-cache");
+		
+		//set log
+		if(log != null) {
+			log.setStatus(status);
+			log.setMessage(message);
+		}
 	}
 	
 	static String mapJSON(HashMap<String, String> map) {

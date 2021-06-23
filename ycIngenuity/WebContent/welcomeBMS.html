@@ -1,14 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-
 <head>
-<meta charset="UTF-8">
-<title>Welcome BMS</title>
-<link rel="stylesheet" href="css/commonCSS.css">
-<link rel="stylesheet" href="css/welcomeBMS.css">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<meta charset="UTF-8">
+	<title>Welcome BMS</title>
+	
+	<link rel="stylesheet" href="css/commonCSS.css">
+	<link rel="stylesheet" href="css/welcomeBMS.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
@@ -19,7 +17,6 @@
 		<section id="switchPanel">
 			<ul id="switchList">
 				<li>
-				
 					<div class="switchBox" id="id">
 						<!-- switch box -->
 						<img class="switchImg" src="resources/image/off.jpg"alt="bulb image">
@@ -29,22 +26,20 @@
 							<p>[Industry]</p>
 							<p class="lastup">last updated : 1 min ago..</p>
 							<label class="switch"><input class="toSwitch" type="checkbox"><span class="slider round"></span></label>
-
 						</div>
 					</div>
-					
 				</li>
-
-
 			</ul>
 		</section>
 
 		<div id="monitor">
-			<!-- monitor -->
+			<div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
 		</div>
 	</div>
 </body>
 
 <script src="js/welcomeBMSLoad.js"></script>
-<script src="js/commonJS.js"></script>
+<script src="js/common.js"></script>
+<script src="js/canvasjs.min.js"></script>
+<script src="js/monitor.js"></script>
 </html>

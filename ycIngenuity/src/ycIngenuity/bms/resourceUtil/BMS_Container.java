@@ -22,10 +22,16 @@ public class BMS_Container {
 	private static String db_user = "jingyu@ycbmsdb";
 	private static String db_pw = "Asdp1234";
 	public static Connection getDBConnection() throws SQLException {
-		System.out.println("Connecting to a ycbms database...");
+		System.out.println("Connection Requested :  Connecting to a ycbms database...");
 		return DriverManager.getConnection(db_url, db_user, db_pw);
 	}
 	
+	//LogOne Resource
+		private static ResourceSLU<LogOne> LOFS = new LogOneDBSystem();
+		private static LogOneResourceManager lom = new LogOneResourceManager(LOFS);
+		public static LogOneResourceManager getLogOneResoucrManager() {
+			return lom;
+		}
 	
 	//RemoteLight Resource
 	private static String shareAccessKeyToAzure = "HostName=ycbms.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=dIlYN60BHpa3HN/i+nXzgRy1LkfflxIcAw9leJIXbRY=";
@@ -42,5 +48,8 @@ public class BMS_Container {
 	public static AccountResourceManager getAccountRsourceManager(){
 		return am;
 	}
+	
+	
+	
 	
 }

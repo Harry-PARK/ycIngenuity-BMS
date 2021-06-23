@@ -1,7 +1,5 @@
 package ycIngenuity.bms.resourceUtil;
 
-import java.sql.ResultSet;
-
 public class Account {
 	
 	private String email;
@@ -9,21 +7,8 @@ public class Account {
 	private String name;
 	
 	
-	public Account() {
-	}
-	
-	public Account(ResultSet rs) {
-		try {
-			setEmail(rs.getString("email"));
-			setPassword(rs.getString("password"));
-			setName(rs.getString("name"));
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
+	public Account() {}
 
-	}
-	
 	
 	public String getEmail() {
 		return email;

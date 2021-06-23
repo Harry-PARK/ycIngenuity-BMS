@@ -1,7 +1,5 @@
-/**
- * 
- */
 const RemoteLight = function() { };
+const Log = function(){};
 
 const jsonParse = function(data, type) {
 	var jsonList = [];

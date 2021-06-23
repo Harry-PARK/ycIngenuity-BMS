@@ -1,6 +1,5 @@
 package ycIngenuity.bms.resourceUtil;
 
-import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -26,34 +25,18 @@ public class RemoteLight {
 	
 
 	
-	public RemoteLight(ResultSet rs) {
-		try {
-			setDevice_id(rs.getString("device_id"));
-			setConnection_string(rs.getString("connection_string"));
-			setLightByInteger(rs.getInt("light"));
-			setOnlineByInteger(rs.getInt("online"));
-			setLast_updatedByString(rs.getString("last_updated"));
-			setInstalled_dateByString(rs.getString("installed_date"));
-			setBuilding(rs.getString("building"));
-			setFloor(rs.getInt("floor"));
-			setRoom_name(rs.getString("room_name"));
-			setRoom_code(rs.getString("room_code"));
-		}
-		catch(Exception e) {
-			e.getStackTrace();
-		}
-	}
+	public RemoteLight() {}
 	
 	public String getDevice_id() {
 		return device_id;
 	}
-	private void setDevice_id(String device_id) {
+	public void setDevice_id(String device_id) {
 		this.device_id = device_id;
 	}
 	public String getConnection_string() {
 		return connection_string;
 	}
-	private void setConnection_string(String connection_string) {
+	public void setConnection_string(String connection_string) {
 		this.connection_string = connection_string;
 	}
 	public Boolean getLight() {
@@ -124,6 +107,7 @@ public class RemoteLight {
 		this.room_code = room_code;
 	}
 	
+	
 	public String toJSON(){
 		long lu = (ZonedDateTime.of(last_updated, ZoneId.systemDefault())).toInstant().toEpochMilli();
 		long insd = (ZonedDateTime.of(installed_date, ZoneId.systemDefault())).toInstant().toEpochMilli();
@@ -142,13 +126,10 @@ public class RemoteLight {
 		info.append("}");
 		return info.toString();
 	}
-
 	@Override
 	public String toString() {
 		return toJSON();
-		
 	}
-	
 	public String toCSV() {
 		StringBuilder csv = new StringBuilder();
 		csv.append(this.device_id +",");

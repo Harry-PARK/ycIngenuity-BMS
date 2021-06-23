@@ -22,7 +22,7 @@ public class WelcomeBmsHandler extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/welcomeBMS.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/welcomeBMS.html");
 		dispatcher.forward(req, resp);
 	}
 

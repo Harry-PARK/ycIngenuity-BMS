@@ -8,7 +8,6 @@ public class AccountResourceManager extends ResourceManager<Account> {
 	}
 	
 
-	
 	public Boolean checkIDPW(String email, String pw) {
 		for(Account account : resourceList) {
 			if(account.getEmail().equals(email) && account.getPassword().equals(pw)) {

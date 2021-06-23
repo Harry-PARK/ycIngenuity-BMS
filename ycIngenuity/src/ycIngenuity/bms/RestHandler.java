@@ -71,10 +71,13 @@ public class RestHandler extends HttpServlet{
 		case "remotelight":
 			RemoteLightREST.getMain(req, resp, command);
 			break;
+		case "log":
+			LogREST.getMain(req, resp, command);
+			break;
 		default :
 			PrintWriter out = resp.getWriter();
 			HashMap<String, String> resultMap = new HashMap<>();
-			CommonRESTUtil.initResultMap(resultMap, "false", null, invalidCommand);
+			CommonRESTUtil.initResultMap(resultMap, false, 0, invalidCommand, null);
 			out.println(CommonRESTUtil.mapJSON(resultMap));
 			break;
 		
@@ -85,7 +88,7 @@ public class RestHandler extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		resp.setContentType("text/html; charset=utf-8");
 		PrintWriter out = resp.getWriter();
-		out.println("<p>test post success</p>");
+		out.println("<p>No Action Defined</p>");
 		out.println("<p>"+req.getRequestURL()+"</p>");
 		out.println("<p>"+req.getParameter("id")+"+</p>");
 	}
@@ -100,7 +103,6 @@ public class RestHandler extends HttpServlet{
 		 */
 		HashMap<String, String> param = getPutParameter(req.getInputStream());
 		String[] command = req.getRequestURI().substring(1).split("/"); //remove empty command
-		System.out.println("requested");
 		switch(CommonRESTUtil.expect(command, 2)) {
 		case "remotelight":
 			RemoteLightREST.putMain(req, resp, command, param);
@@ -108,7 +110,7 @@ public class RestHandler extends HttpServlet{
 		default :
 			PrintWriter out = resp.getWriter();
 			HashMap<String, String> resultMap = new HashMap<>();
-			CommonRESTUtil.initResultMap(resultMap, "false", null, invalidCommand);
+			CommonRESTUtil.initResultMap(resultMap, false, 0, invalidCommand, null);
 			out.println(CommonRESTUtil.mapJSON(resultMap));
 			break;
 		}

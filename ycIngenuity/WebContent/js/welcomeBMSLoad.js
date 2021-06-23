@@ -1,13 +1,9 @@
-/**
- * 
- */
-
 let remoteLightList = [];
 const _email = "airroket@naver.com";
 const _pw = "asdf";
 const _onImg = "resources/image/on.jpg";
 const _offImg = "resources/image/off.jpg";
-const _host = "/ycibms-2021";
+const _host = "/ycibms";
 
 const registerSwitchEvent = function() {
 	var nodeList = document.querySelectorAll('input[type="checkbox"]');
