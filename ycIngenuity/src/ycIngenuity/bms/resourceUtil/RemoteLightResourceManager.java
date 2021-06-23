@@ -91,8 +91,6 @@ public class RemoteLightResourceManager extends ResourceManager<RemoteLight>{
 		 * 404 : Direct method not defined
 		 * 
 		 */
-		
-		//TODO rebuild print log
 		try {
 			// Create a DeviceMethod instance to call a direct method.
 			DeviceMethod methodClient = DeviceMethod.createFromConnectionString(shareAccessKeyToAzure);

@@ -42,13 +42,11 @@ public class RemoteLightDBSystem implements ResourceSLU<RemoteLight> {
 
 	@Override
 	public Boolean save_resource(List<RemoteLight> resources) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Boolean update_resource(List<RemoteLight> resources) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

@@ -14,7 +14,7 @@ public abstract class ResourceManager<T> {
 	}
 	
 	
-	//TODO print task
+
 	//ResourceSLU is an Interface handling resource; save, load, and update
 	public void load_resource() {
 		resourceList = resourceFileSystem.load_resource();

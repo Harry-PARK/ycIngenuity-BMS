@@ -42,13 +42,11 @@ public class AccountDBSystem implements ResourceSLU<Account> {
 
 	@Override
 	public Boolean save_resource(List<Account> resources) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Boolean update_resource(List<Account> resources) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

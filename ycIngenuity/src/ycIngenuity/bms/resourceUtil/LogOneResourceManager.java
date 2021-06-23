@@ -20,9 +20,6 @@ public class LogOneResourceManager extends ResourceManager<LogOne> {
 		}
 		resourceList.clear();
 		activateSaveThread();
-		
-		System.out.println(resourceList.size());
-		System.out.println(log_archive.size());
 	}
 	
 	public void newLog(

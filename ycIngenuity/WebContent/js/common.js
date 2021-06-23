@@ -16,6 +16,9 @@ const jsonParse = function(data, type) {
 		if(type == "remotelight"){
 			temp = new RemoteLight();
 		}
+		else if (type == "log") {
+			temp = new Log();
+        }
 		else{
 			temp = new Object();
 		}

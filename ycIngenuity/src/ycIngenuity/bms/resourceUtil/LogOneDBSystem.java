@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LogOneDBSystem implements ResourceSLU<LogOne> {
@@ -22,6 +23,7 @@ public class LogOneDBSystem implements ResourceSLU<LogOne> {
 			}
 			//It can't use BMS_container.LogOneResourceManager in this method, because
 			//it's before initiating LogOneResourceMaanger
+			Collections.reverse(list);
 			LogOne log = new LogOne();
 			log.setEvent_date(LocalDateTime.now());
 			log.setMethod_name("LogOneDBSystem.load_resource");
@@ -50,7 +52,6 @@ public class LogOneDBSystem implements ResourceSLU<LogOne> {
 			conn.setAutoCommit(false);
 			Statement stmt = conn.createStatement();
 			for(LogOne lo : resources) {
-				//TODO check ' ' in values
 				String query = "INSERT INTO ycbms.logone("
 						+ "event_date, "
 						+ "method_name, "
@@ -99,7 +100,6 @@ public class LogOneDBSystem implements ResourceSLU<LogOne> {
 
 	@Override
 	public Boolean update_resource(List<LogOne> resources) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

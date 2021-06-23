@@ -3,7 +3,7 @@ const _email = "airroket@naver.com";
 const _pw = "asdf";
 const _onImg = "resources/image/on.jpg";
 const _offImg = "resources/image/off.jpg";
-const _host = "/ycibms";
+const _host = "/ycibms-2021";
 
 const registerSwitchEvent = function() {
 	var nodeList = document.querySelectorAll('input[type="checkbox"]');
@@ -96,7 +96,7 @@ const rltDisplayHTML = function(remotelight) {
 	if(remotelight.light == "true"){
 		check = "checked";
 	}
-	html = "";
+	var html = "";
 	html += "<li>";
 	html += "	<div class='switchBox' id='"+remotelight.device_id+"'> <!-- switch box -->";
 	

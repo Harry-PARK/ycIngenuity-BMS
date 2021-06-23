@@ -2,6 +2,7 @@ package ycIngenuity.bms;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,17 +16,17 @@ public class LogREST {
 		
 		//command[3] : required amount
 		String amount = CommonRESTUtil.expect(command, 3);
+		List<LogOne> log_archive = BMS_Container.getLogOneResoucrManager().getLogArchive();
 		if(amount == null) {
-			for(LogOne log : BMS_Container.getLogOneResoucrManager().getLogArchive()) {
-				out.println(log);
+			for(int i = log_archive.size()-1; i >= 0; i-- ) {
+				out.println(log_archive.get(i));
 			}
 		}
 		else {
 			int amountInt = Integer.parseInt(amount);
-			int i = 0;
-			for(LogOne log : BMS_Container.getLogOneResoucrManager().getLogArchive()) {
-				if(i++ < amountInt)out.println(log);
-				else break;
+			amountInt = (amountInt < 0) ? 0 : amountInt;
+			for(int i = log_archive.size()-1; i >= log_archive.size()-amountInt; i-- ) {
+				out.println(log_archive.get(i));
 			}
 		}
 	}
