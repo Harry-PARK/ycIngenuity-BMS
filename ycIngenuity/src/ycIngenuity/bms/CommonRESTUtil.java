@@ -28,7 +28,7 @@ public class CommonRESTUtil {
 		
 		//set log
 		if(log != null) {
-			log.setStatus(status);
+			log.setState(status);
 			log.setMessage(message);
 		}
 	}

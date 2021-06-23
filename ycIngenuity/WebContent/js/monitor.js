@@ -99,7 +99,15 @@ var usedHour_weeklyGraph = function(log_list) {
 
 
 var logDisplayHTML = function(log_list) {
-		document.getElementById("logTable").innerHTML = "";
+		var html = "";
+		html += "<tr>";
+		html += "<th style='width: 200px;'>Date</th>";
+		html += "<th style='width: 300px;'>Method Name</th>";
+		html += "<th style='width: 600px;'>Message</th>";
+		html += "<th style='width: 100px;'>State</th>";
+		html += "<th style='width: 100px;'>Devide ID</th>";
+		html += "</tr>";
+		document.getElementById("logTable").innerHTML = html;
 	for (var i = 0; i < log_list.length; i++) {
 		var log = log_list[i];
 		var html = "";

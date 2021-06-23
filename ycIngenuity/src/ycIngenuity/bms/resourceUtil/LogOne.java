@@ -8,7 +8,7 @@ public class LogOne {
 	private LocalDateTime event_date;
 	private String method_name;
 	private String message;
-	private int status;
+	private int state;
 	private String device_id;
 	private String email;
 	
@@ -37,12 +37,13 @@ public class LogOne {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public int getStatus() {
-		return status;
+	public int getState() {
+		return state;
 	}
-	public void setStatus(int status) {
-		this.status = status;
+	public void setState(int state) {
+		this.state = state;
 	}
+	
 	public String getDevice_id() {
 		return device_id;
 	}
@@ -64,7 +65,7 @@ public class LogOne {
 		info.append("event_date:"+ed+",");
 		info.append("method_name:"+this.method_name+",");
 		info.append("message:"+this.message+",");
-		info.append("status:"+this.status+",");
+		info.append("status:"+this.state+",");
 		info.append("device_id:"+this.device_id+",");
 		info.append("email:"+this.email);
 		info.append("}");
@@ -74,6 +75,9 @@ public class LogOne {
 	public String toString() {
 		return toJSON();
 	}
+
+
+
 
 
 

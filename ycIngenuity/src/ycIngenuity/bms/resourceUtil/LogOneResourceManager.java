@@ -34,7 +34,7 @@ public class LogOneResourceManager extends ResourceManager<LogOne> {
 		log.setEvent_date(ldt);
 		log.setMethod_name(method_name);
 		log.setMessage(message);
-		log.setStatus(status);
+		log.setState(status);
 		log.setDevice_id(device_id);
 		log.setEmail(email);
 		newLogMethod(log);

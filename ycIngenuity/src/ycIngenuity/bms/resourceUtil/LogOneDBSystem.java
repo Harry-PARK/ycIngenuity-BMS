@@ -28,7 +28,7 @@ public class LogOneDBSystem implements ResourceSLU<LogOne> {
 			log.setEvent_date(LocalDateTime.now());
 			log.setMethod_name("LogOneDBSystem.load_resource");
 			log.setMessage("Log loaded from DB successfully");
-			log.setStatus(200);
+			log.setState(200);
 			list.add(log);
 			System.out.println(log);
 		} catch(SQLException e) {
@@ -37,7 +37,7 @@ public class LogOneDBSystem implements ResourceSLU<LogOne> {
 			log.setEvent_date(LocalDateTime.now());
 			log.setMethod_name("LogOneDBSystem.load_resource");
 			log.setMessage(e.getMessage());
-			log.setStatus(0);
+			log.setState(0);
 			list.add(log);
 			System.out.println(log);
 		}
@@ -56,14 +56,14 @@ public class LogOneDBSystem implements ResourceSLU<LogOne> {
 						+ "event_date, "
 						+ "method_name, "
 						+ "message, "
-						+ "status, "
+						+ "state, "
 						+ "device_id, "
 						+ "email) "
 						+ "VALUES('"
 						+ lo.getEvent_date()+"','"
 						+ lo.getMethod_name()+"','"
 						+ lo.getMessage()+"','"
-						+ lo.getStatus()+"','"
+						+ lo.getState()+"','"
 						+ lo.getDevice_id()+"','"
 						+ lo.getEmail()+"')";
 				stmt.addBatch(query);
@@ -111,7 +111,7 @@ public class LogOneDBSystem implements ResourceSLU<LogOne> {
 			lo.setEvent_dateByString(rs.getString("event_date"));
 			lo.setMethod_name(rs.getString("method_name"));
 			lo.setMessage(rs.getString("message"));
-			lo.setStatus(rs.getInt("status"));
+			lo.setState(rs.getInt("state"));
 			lo.setDevice_id(rs.getString("device_id"));
 			lo.setEmail(rs.getString("email"));
 		}
