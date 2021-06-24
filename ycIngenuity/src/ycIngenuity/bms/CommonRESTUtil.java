@@ -21,7 +21,7 @@ public class CommonRESTUtil {
 			){
 		//each component indicates json property
 		resultMap.put("success", ""+success);
-		resultMap.put("status", String.valueOf(status));
+		resultMap.put("state", String.valueOf(status));
 		resultMap.put("message", message);
 		resultMap.put("cacheable", "non-cacheable");
 		//resultMap.put("Cache-Control", "no-cache");

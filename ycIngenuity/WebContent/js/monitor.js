@@ -18,7 +18,7 @@ var usedHour_weeklyGraph = function(log_list) {
 		if (daydiff > 7) break;
 		if (
 			(log.method_name == "lighton" || log.method_name == "lightoff")
-			&& log.status == "200"
+			&& log.state == "200"
 		) {
 			week.push(log);
 		}
@@ -115,7 +115,7 @@ var logDisplayHTML = function(log_list) {
 		html += "<td style='width: 200px;'>" + (new Date(Number(log.event_date))).toLocaleString() + "</th>";
 		html += "<td style='width: 300px;'>" + log.method_name + "</th>";
 		html += "<td style='width: 600px;'>" + log.message + "</th>";
-		html += "<td style='width: 100px;'>" + log.status + "</th>";
+		html += "<td style='width: 100px;'>" + log.state + "</th>";
 		html += "<td style='width: 100px;'>" + log.device_id + "</th>";
 		html += "</tr>";
 		document.getElementById("logTable").innerHTML += html;
