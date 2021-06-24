@@ -65,7 +65,7 @@ public class LogOne {
 		info.append("event_date:"+ed+",");
 		info.append("method_name:"+this.method_name+",");
 		info.append("message:"+this.message+",");
-		info.append("status:"+this.state+",");
+		info.append("state:"+this.state+",");
 		info.append("device_id:"+this.device_id+",");
 		info.append("email:"+this.email);
 		info.append("}");
